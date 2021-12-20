@@ -24,6 +24,11 @@ public class Author {
     @Column(unique = true, nullable = false)
     private String name;
 
-    @ManyToMany(mappedBy = "authors")
+    @OneToMany
+    @JoinTable(
+            name = "authors_books",
+            joinColumns = @JoinColumn(name = "author_id"),
+            inverseJoinColumns = @JoinColumn(name = "book_id")
+    )
     private Set<Book> books;
 }

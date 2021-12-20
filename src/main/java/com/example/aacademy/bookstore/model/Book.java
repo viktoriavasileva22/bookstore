@@ -25,6 +25,9 @@ public class Book {
     @Column(unique = true, nullable = false)
     private String title;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "books")
     private Set<Author> authors;
+
+    @ManyToMany(mappedBy = "books")
+    private Set<Publisher> publishers;
 }
