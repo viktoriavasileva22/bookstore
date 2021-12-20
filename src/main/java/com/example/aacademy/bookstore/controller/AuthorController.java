@@ -37,9 +37,9 @@ public class AuthorController {
 
     @PostMapping
     public ResponseEntity<AuthorDto> save(@RequestBody @Valid AuthorDto authorDto) {
-        Author book = authorConverter.toAuthor(authorDto);
-        Author savedBook = authorService.save(book);
-        return ResponseEntity.ok(authorConverter.toAuthorDto(savedBook));
+        Author author = authorConverter.toAuthor(authorDto);
+        Author savedAuthor = authorService.save(author);
+        return ResponseEntity.ok(authorConverter.toAuthorDto(savedAuthor));
     }
 
     @DeleteMapping("/{id}")
