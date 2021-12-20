@@ -22,15 +22,16 @@ public class BookController {
     private final BookConverter bookConverter;
 
     @GetMapping
-    public ResponseEntity<Set<BookDto>> findAll(){
+    public ResponseEntity<Set<BookDto>> findAll() {
         return ResponseEntity.ok(bookService
                 .findAll()
                 .stream()
                 .map(bookConverter::toBookDto)
                 .collect(Collectors.toSet()));
     }
+
     @GetMapping("/id/{id}")
-    public ResponseEntity<BookDto>findById(@PathVariable Long id){
+    public ResponseEntity<BookDto> findById(@PathVariable Long id) {
         return ResponseEntity.ok(bookConverter.toBookDto(bookService.findById(id)));
     }
 
@@ -43,14 +44,14 @@ public class BookController {
     }*/
 
     @PostMapping
-    public ResponseEntity<BookDto> save(@RequestBody @Valid BookDto bookDto){
-        Book book= bookConverter.toBook(bookDto);
-        Book savedBook=bookService.save(book);
+    public ResponseEntity<BookDto> save(@RequestBody @Valid BookDto bookDto) {
+        Book book = bookConverter.toBook(bookDto);
+        Book savedBook = bookService.save(book);
         return ResponseEntity.ok(bookConverter.toBookDto(savedBook));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<HttpStatus> delete(@PathVariable Long id){
+    public ResponseEntity<HttpStatus> delete(@PathVariable Long id) {
         bookService.delete(id);
         return ResponseEntity.ok().build();
     }
